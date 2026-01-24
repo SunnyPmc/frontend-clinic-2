@@ -60,6 +60,42 @@
 // export default MonoBlog;
 
 
+// import { Link } from "react-router-dom";
+
+// const MonoBlog = ({ data }) => {
+//   const formattedDate = data?.createdAt
+//     ? new Date(data.createdAt).toLocaleDateString()
+//     : "";
+
+//   return (
+//     <div className="overflow-hidden rounded-lg border border-gray-100 hover:shadow-2xl bg-white shadow-gray-300 transition-all duration-300">
+//       <Link to={`/blogs/${data?._id}`}>
+//         <img
+//           src={data?.image}
+//           alt={data?.title}
+//           className="w-full h-56.5 object-cover"
+//         />
+
+//         <div className="m-6">
+//           <p className="text-[10px] xs:text-[14px] font-normal text-gray-400">
+//             {formattedDate} 
+//           </p>
+
+//           <p className="text-[14px] xs:text-lg font-medium text-[#333333]">
+//             {data?.title?.length > 40
+//               ? `${data.title.slice(0, 40)}...`
+//               : data?.title}
+//           </p>
+//         </div>
+//       </Link>
+//     </div>
+//   );
+// };
+
+// export default MonoBlog;
+// / {data?.comments?.length || 0} Comments
+
+
 import { Link } from "react-router-dom";
 
 const MonoBlog = ({ data }) => {
@@ -67,11 +103,16 @@ const MonoBlog = ({ data }) => {
     ? new Date(data.createdAt).toLocaleDateString()
     : "";
 
+  // Prepend backend URL if image exists
+  const imageUrl = data?.image
+    ? `${import.meta.env.VITE_API_BASE_URL}/uploads/images/${data.image}`
+    : "https://via.placeholder.com/400x250"; // fallback image
+
   return (
     <div className="overflow-hidden rounded-lg border border-gray-100 hover:shadow-2xl bg-white shadow-gray-300 transition-all duration-300">
       <Link to={`/blogs/${data?._id}`}>
         <img
-          src={data?.image}
+          src={imageUrl}
           alt={data?.title}
           className="w-full h-56.5 object-cover"
         />
@@ -93,4 +134,3 @@ const MonoBlog = ({ data }) => {
 };
 
 export default MonoBlog;
-// / {data?.comments?.length || 0} Comments
