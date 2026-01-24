@@ -7,11 +7,19 @@
 //   return res.data;
 // };
 
+// import axios from "axios";
+
+// const API = axios.create({
+//   baseURL: import.meta.env.VITE_API_BASE_URL, // dynamic backend URL
+// });
+
+// // Fetch all testimonials
+// export const fetchTestimonials = () => API.get("/testimonials");
+
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, // dynamic backend URL
+  baseURL: import.meta.env.VITE_API_BASE_URL + "/api",
 });
 
-// Fetch all testimonials
 export const fetchTestimonials = () => API.get("/testimonials");
