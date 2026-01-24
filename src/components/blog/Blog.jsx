@@ -120,20 +120,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./blog.css";
 
-// Swiper breakpoints
 const custom_breakpoints = {
-  640: {
-    slidesPerView: 2,
-    spaceBetween: 15,
-  },
-  768: {
-    slidesPerView: 3,
-    spaceBetween: 15,
-  },
-  1220: {
-    slidesPerView: 4,
-    spaceBetween: 24,
-  },
+  640: { slidesPerView: 2, spaceBetween: 15 },
+  768: { slidesPerView: 3, spaceBetween: 15 },
+  1220: { slidesPerView: 4, spaceBetween: 24 },
 };
 
 const Blog = () => {
@@ -143,8 +133,6 @@ const Blog = () => {
   useEffect(() => {
     getBlogs()
       .then((res) => {
-        console.log("API RESPONSE:",res);
-        console.log("BLOG DATA", res.data);
         setBlogs(res.data);
         setLoading(false);
       })
@@ -155,36 +143,36 @@ const Blog = () => {
   }, []);
 
   return (
-  <div className="content py-25 px-2 relative" id="blog">
-    <div className="max-w-135 text-center mx-auto pb-17.5">
-      <p className="section-title pb-6">Blog</p>
-      <p className="text-xs xs:text-[16px] md:text-lg text-gray-400">
-        Stay updated with the latest tips, guides, and insights on hearing health,
-        speech therapy, and living confidently with hearing aids.
-      </p>
-    </div>
+    <div className="content py-25 px-2 relative" id="blog">
+      <div className="max-w-135 text-center mx-auto pb-17.5">
+        <p className="section-title pb-6">Blog</p>
+        <p className="text-xs xs:text-[16px] md:text-lg text-gray-400">
+          Stay updated with the latest tips, guides, and insights on hearing health,
+          speech therapy, and living confidently with hearing aids.
+        </p>
+      </div>
 
-    {loading ? (
-      <p className="text-center">Loading blogs...</p>
-    ) : blogs.length > 0 ? (
-      <Swiper
-        grabCursor={true}
-        breakpoints={custom_breakpoints}
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-      >
-        {blogs.map((blog) => (
-          <SwiperSlide key={blog._id} className="mb-10">
-            <MonoBlog data={blog} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    ) : (
-      <p className="text-center text-gray-400">No blogs available</p>
-    )}
-  </div>
-);
-}
+      {loading ? (
+        <p className="text-center">Loading blogs...</p>
+      ) : blogs.length > 0 ? (
+        <Swiper
+          grabCursor={true}
+          breakpoints={custom_breakpoints}
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+        >
+          {blogs.map((blog) => (
+            <SwiperSlide key={blog._id} className="mb-10">
+              <MonoBlog data={blog} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <p className="text-center text-gray-400">No blogs available</p>
+      )}
+    </div>
+  );
+};
 
 export default Blog;
 

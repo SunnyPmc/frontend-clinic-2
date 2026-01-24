@@ -103,10 +103,10 @@ const MonoBlog = ({ data }) => {
     ? new Date(data.createdAt).toLocaleDateString()
     : "";
 
-  // prepend backend URL to image
-  const imageUrl = data?.image
-    ? `${import.meta.env.VITE_API_BASE_URL}/uploads/images/${data.image}`
-    : "https://via.placeholder.com/400x250"; // fallback if image missing
+  // Replace localhost with live backend URL if needed
+  const imageUrl = data?.image?.startsWith("http")
+    ? data.image.replace("http://localhost:5000", import.meta.env.VITE_API_BASE_URL)
+    : `${import.meta.env.VITE_API_BASE_URL}/${data?.image}`;
 
   return (
     <div className="overflow-hidden rounded-lg border border-gray-100 hover:shadow-2xl bg-white shadow-gray-300 transition-all duration-300">
@@ -119,7 +119,7 @@ const MonoBlog = ({ data }) => {
 
         <div className="m-6">
           <p className="text-[10px] xs:text-[14px] font-normal text-gray-400">
-            {formattedDate} 
+            {formattedDate}
           </p>
 
           <p className="text-[14px] xs:text-lg font-medium text-[#333333]">
@@ -134,4 +134,5 @@ const MonoBlog = ({ data }) => {
 };
 
 export default MonoBlog;
+
 
