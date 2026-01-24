@@ -103,10 +103,10 @@ const MonoBlog = ({ data }) => {
     ? new Date(data.createdAt).toLocaleDateString()
     : "";
 
-  // Prepend backend URL if image exists
+  // prepend backend URL to image
   const imageUrl = data?.image
     ? `${import.meta.env.VITE_API_BASE_URL}/uploads/images/${data.image}`
-    : "https://via.placeholder.com/400x250"; // fallback image
+    : "https://via.placeholder.com/400x250"; // fallback if image missing
 
   return (
     <div className="overflow-hidden rounded-lg border border-gray-100 hover:shadow-2xl bg-white shadow-gray-300 transition-all duration-300">
@@ -134,3 +134,4 @@ const MonoBlog = ({ data }) => {
 };
 
 export default MonoBlog;
+
