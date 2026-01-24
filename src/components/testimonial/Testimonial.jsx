@@ -60,6 +60,61 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/effect-fade";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import { EffectFade, Navigation, Pagination } from "swiper/modules";
+// import TestimonialTemplate from "./TestimonialTemplate";
+// import "./testimonial.css";
+
+// const Testimonial = () => {
+//   const [testimonials, setTestimonials] = useState([]);
+
+//   useEffect(() => {
+//     const fetchTestimonials = async () => {
+//       try {
+//         const res = await fetch("http://localhost:5000/api/testimonials");
+//         console.log(res.data);
+//         const data = await res.json();
+//         setTestimonials(data);
+//       } catch (error) {
+//         console.error("Failed to load testimonials", error);
+//       }
+//     };
+
+//     fetchTestimonials();
+//   }, []);
+
+//   if (!testimonials.length) return null;
+
+//   return (
+//     <div className="flex mx-auto justify-center px-2 max-w-218 pb-10 md:pb-25">
+//       <div className="w-full h-full cursor-grab">
+//         <p className="section-title mb-6 text-center">Testimonial</p>
+
+//         <Swiper
+//           id="testimonialSwiper"
+//           spaceBetween={30}
+//           pagination={{ clickable: true }}
+//           modules={[EffectFade, Navigation, Pagination]}
+//         >
+//           {testimonials.map((testimonial) => (
+//             <SwiperSlide key={testimonial._id}>
+//               <TestimonialTemplate testimonial={testimonial} />
+//             </SwiperSlide>
+//           ))}
+//         </Swiper>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Testimonial;
+
+
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -72,23 +127,29 @@ import "./testimonial.css";
 
 const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/testimonials");
-        console.log(res.data);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setTestimonials(data);
       } catch (error) {
         console.error("Failed to load testimonials", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchTestimonials();
   }, []);
 
-  if (!testimonials.length) return null;
+  if (loading) return <p className="text-center">Loading testimonials...</p>;
+  if (!testimonials.length) return <p className="text-center text-gray-400">No testimonials available</p>;
 
   return (
     <div className="flex mx-auto justify-center px-2 max-w-218 pb-10 md:pb-25">
