@@ -39,7 +39,7 @@ const Footer = () => {
           ))}
         </div>
         <p className="text-[12px] sm:text-[16px]">
-          Copyright &copy; {copyrightYear} Clinic. All rights reserved.
+          Copyright &copy; {copyrightYear} KHASC. All rights reserved. 
         </p>
       </div>
       <p className="text-white text-center max-xs:text-[12px] max-md:text-[14px] w-full py-10">
