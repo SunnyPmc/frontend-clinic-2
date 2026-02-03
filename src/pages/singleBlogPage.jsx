@@ -106,6 +106,7 @@ const SingleBlogPage = () => {
     const fetchBlog = async () => {
       try {
         const data = await getBlogById(id);
+        console.log(data)
 
         // Fix image URL
         const imageUrl =

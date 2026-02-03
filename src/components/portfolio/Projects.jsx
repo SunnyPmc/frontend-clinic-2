@@ -5,22 +5,16 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 const Projects = ({ data }) => {
-  //  const imageUrl = data.image
-  //   ? `${API_BASE_URL}/${data.image}`
-  //   : "";
+  
    const imageUrl = data.image
-    ? data.image.startsWith("http") // Already absolute (Cloudinary)
+    ? data.image.startsWith("http") 
       ? data.image
-      : `${API_BASE_URL}/${data.image}` // Backend relative path
+      : `${API_BASE_URL}/${data.image}` 
     : "/placeholder.png"; 
-    
+
   return (
     <div className="max-w-106 rounded-lg outline-[#FFFFFF] hover:shadow-2xl duration-300 transition-all shadow-gray-300 border border-gray-200">
-      {/* <img
-        src={data?.image}
-        alt={data?.title}
-        className="w-full h-48 object-cover"
-      /> */}
+      
       <img
         src={imageUrl}
         // src={data.img}
